@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 # Aptos related files
 .aptos
 .env
 contract/build
 
-=======
->>>>>>> origin/main
 # Logs
 logs
 *.log
@@ -17,16 +14,11 @@ lerna-debug.log*
 
 node_modules
 dist
-<<<<<<< HEAD
 build
 dist-ssr
 *.local
 package-lock.json
 pnpm-lock.yaml
-=======
-dist-ssr
-*.local
->>>>>>> origin/main
 
 # Editor directories and files
 .vscode/*
@@ -38,11 +30,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-<<<<<<< HEAD
 
 # template related files
 example-collection/
 
 .next
-=======
->>>>>>> origin/main
+
+
+venv/
