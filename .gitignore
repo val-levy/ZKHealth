@@ -42,3 +42,9 @@ contract/Move.toml
 contract/Move.local.toml
 backend/__pycache__
 backend/routes/__pycache__
+
+# Ignore Move.toml and Move.local.toml
+contract/Move.toml
+
+# Ignore env folder
+env/
