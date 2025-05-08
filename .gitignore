@@ -2,7 +2,8 @@
 .aptos
 .env
 contract/build
-
+../env
+contract/Move.toml
 # Logs
 logs
 *.log
