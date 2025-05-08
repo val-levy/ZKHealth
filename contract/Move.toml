@@ -4,7 +4,7 @@ version = "1.0.0"
 authors = []
 
 [addresses]
-medrec_addr = "0x1"
+medrec_addr = "0xf6afd06f6292862ec250df3e8228305b451dd201f9af1044d3553ed392ace4e1"
 
 [dependencies]
 AptosFramework = { git = "https://github.com/aptos-labs/aptos-core.git", rev = "mainnet", subdir = "aptos-move/framework/aptos-framework" }

@@ -36,5 +36,8 @@ example-collection/
 
 .next
 
-
 venv/
+contract/Move.toml
+contract/Move.local.toml
+backend/__pycache__
+backend/routes/__pycache__
