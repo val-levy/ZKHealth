@@ -1,12 +1,32 @@
 #!/bin/bash
 
-echo "🔄 Swapping in Move.local.toml..."
+echo "🔄 Using Move.local.toml..."
 cp Move.local.toml Move.toml
 
-echo "🔨 Compiling Move package..."
-aptos move compile
+# Ask the user for an action
+echo "What do you want to do?"
+echo "1) Compile"
+echo "2) Test"
+echo "3) Publish"
+read -p "Enter choice [1-3]: " choice
 
-# Optional: uncomment the next line to restore the git-safe dummy after building
-# git checkout Move.toml
+case $choice in
+  1)
+    echo "🔨 Compiling..."
+    aptos move compile
+    ;;
+  2)
+    echo "🧪 Running tests..."
+    aptos move test
+    ;;
+  3)
+    echo "🚀 Publishing to Aptos..."
+    aptos move publish --profile default
+    ;;
+  *)
+    echo "❌ Invalid option. Exiting."
+    exit 1
+    ;;
+esac
 
 echo "✅ Done."
