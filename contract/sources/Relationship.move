@@ -32,7 +32,7 @@ module medrec_addr::Relationship {
     const EVIEWER_EXISTS: u64 = 4;
     const EINACTIVE_RELATIONSHIP: u64 = 5;
 
-    public fun create_relationship(account: &signer, provider: address) acquires Relationships {
+    public entry fun create_relationship(account: &signer, provider: address) acquires Relationships {
         let patron = signer::address_of(account);
         
         // Verify provider is actually a provider
