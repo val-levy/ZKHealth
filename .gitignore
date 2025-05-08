@@ -37,4 +37,4 @@ example-collection/
 .next
 
 
-venv/contract/Move.toml
+contract/Move.toml
