@@ -1,6 +1,5 @@
 # Stellar MedRec
 
-This project adapts the MedRec functionality for the Stellar blockchain. It provides a decentralized way to manage medical records using Stellar's blockchain technology.
 
 ## Project Structure
 
