@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "firebase": "^11.7.3",
     "stellar-sdk": "^13.3.0"
   },
   "devDependencies": {
