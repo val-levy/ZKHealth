@@ -8,7 +8,7 @@ set -euo pipefail
 read -rp "Install Rust (rustup + toolchain)? [y/N]: " INSTALL_RUST
 if [[ "$INSTALL_RUST" =~ ^[Yy]$ ]]; then
   echo "Installing rustup and Rust..."
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
   source "$HOME/.cargo/env"
   echo "Rust toolchain installed."
 fi
