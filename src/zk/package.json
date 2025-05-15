@@ -12,6 +12,6 @@
   "dependencies": {
     "circomlibjs": "^0.1.7",
     "dotenv": "^16.5.0",
-    "stellar-sdk": "^10.4.0"
+    "stellar-sdk": "^10.4.1"
   }
 }
