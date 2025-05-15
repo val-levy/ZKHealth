@@ -1,0 +1,9 @@
+node_modules/
+*.zkey
+*.ptau
+*.wasm
+*.sym
+witness.wtns
+proof.json
+public.json
+src/zk/circuit/circomlib/
