@@ -1,18 +1,28 @@
--- USERS table
-create table if not exists users (
-  id uuid primary key default uuid_generate_v4(),
-  wallet text not null unique,
-  yubikey_cred_id text unique,
-  email text,
-  created_at timestamptz default now()
+
+-- Drop tables if they exist (will wipe data!)
+drop table if exists medical_records cascade;
+drop table if exists relationships cascade;
+drop table if exists users cascade;
+
+-- Create users table with TEXT ID
+create table users (
+  id text primary key,
+  name text,
+  role text check (role in ('patient', 'provider')) not null
 );
 
--- RECORDS table
-create table if not exists records (
-  id uuid primary key default uuid_generate_v4(),
-  user_id uuid references users(id) on delete cascade,
-  file_path text not null, -- For Supabase Storage
-  encrypted_meta jsonb,
-  shared_with text[], -- List of provider wallet addresses
-  created_at timestamptz default now()
+-- Create relationships table using TEXT IDs
+create table relationships (
+  id serial primary key,
+  patient_id text references users(id),
+  provider_id text references users(id)
+);
+
+-- Create medical_records table using TEXT IDs
+create table medical_records (
+  id serial primary key,
+  cid text not null,
+  file_url text not null,
+  uploaded_at timestamp default current_timestamp,
+  patient_id text references users(id)
 );

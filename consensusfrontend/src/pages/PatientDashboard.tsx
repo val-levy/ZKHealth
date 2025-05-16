@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
 import {
   UploadIcon,
   FileIcon,
   TrashIcon,
-  ShareIcon,
   CheckCircleIcon,
   InboxIcon,
   CheckIcon,
@@ -12,6 +11,8 @@ import {
 } from 'lucide-react'
 import Button from '../components/Button'
 import { useLocalStorageRequests } from '../hooks/useLocalStorageRequests'
+import FileUpload from '../components/FileUpload'
+
 
 interface FileItem {
   id: string
@@ -21,6 +22,7 @@ interface FileItem {
   uploadDate: string
   status: 'uploaded' | 'shared'
   ownerId: string
+  file_url?: string
 }
 
 const PatientDashboard: React.FC = () => {
@@ -51,6 +53,36 @@ const PatientDashboard: React.FC = () => {
   const [success, setSuccess] = useState(false)
   const [uploadSuccess, setUploadSuccess] = useState(false)
 
+  // Function to fetch files from Supabase
+  const fetchFiles = async () => {
+    if (!user?.id) return
+    try {
+      const res = await fetch(`http://127.0.0.1:8000/records/${user.id}`)
+      const data = await res.json()
+
+      if (data.records) {
+        setFiles(
+          data.records.map((record: any) => ({
+            id: record.cid,
+            name: record.file_url.split('/').pop(),
+            type: record.file_url.split('.').pop()?.toUpperCase() || 'Unknown',
+            size: '—',
+            uploadDate: new Date(record.uploaded_at).toISOString().split('T')[0],
+            status: 'uploaded',
+            ownerId: user.id,
+            file_url: record.file_url,
+          }))
+        )
+      }
+    } catch (error) {
+      console.error("Error fetching files:", error)
+    }
+  }
+
+  useEffect(() => {
+    fetchFiles()
+  }, [user])
+
   const handleAccept = (id: string) => {
     updateRequest(id, 'accepted')
     setSuccess(true)
@@ -71,23 +103,49 @@ const PatientDashboard: React.FC = () => {
     else return (bytes / 1048576).toFixed(1) + ' MB'
   }
 
-  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileInput = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return
-    const newFiles: FileItem[] = []
-    Array.from(e.target.files).forEach((file) => {
-      newFiles.push({
-        id: Math.random().toString(36).substring(2),
-        name: file.name,
-        type: file.name.split('.').pop()?.toUpperCase() || 'Unknown',
-        size: formatFileSize(file.size),
+
+    const uploaded = e.target.files[0]
+
+    const formData = new FormData()
+    formData.append("file", uploaded)
+    formData.append("user_id", user?.id || "")
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/upload", {
+        method: "POST",
+        body: formData,
+      })
+      const data = await response.json()
+
+      if (!response.ok) {
+        console.error("Upload failed", data)
+        return
+      }
+
+      // Add file info locally after successful upload
+      const newFile: FileItem = {
+        id: data.cid, // use CID as a unique ID
+        name: uploaded.name,
+        type: uploaded.name.split('.').pop()?.toUpperCase() || 'Unknown',
+        size: formatFileSize(uploaded.size),
         uploadDate: new Date().toISOString().split('T')[0],
         status: 'uploaded',
         ownerId: user?.id || '',
-      })
-    })
-    setFiles((prev) => [...newFiles, ...prev])
-    setUploadSuccess(true)
-    setTimeout(() => setUploadSuccess(false), 3000)
+      }
+
+      // Update the local state
+      setFiles((prev) => [newFile, ...prev])
+      setUploadSuccess(true)
+      setTimeout(() => setUploadSuccess(false), 3000)
+      
+      // Refresh file list from the backend
+      await fetchFiles()
+
+    } catch (err) {
+      console.error("Upload error:", err)
+    }
   }
 
   return (
@@ -127,10 +185,9 @@ const PatientDashboard: React.FC = () => {
         <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
           <UploadIcon size={48} className="mx-auto text-gray-400 mb-4" />
           <p className="text-gray-600 mb-4">Drag and drop files here, or click to select files</p>
-          <input type="file" id="fileUpload" className="hidden" multiple onChange={handleFileInput} />
-          <label htmlFor="fileUpload">
-            <Button variant="primary">Select Files</Button>
-          </label>
+          {user?.id && (
+            <FileUpload userId={user.id} onUploadComplete={fetchFiles} />
+          )}
           <p className="text-xs text-gray-500 mt-2">Supported formats: PDF, JPEG, PNG, DICOM, and more</p>
         </div>
       </div>
@@ -152,6 +209,7 @@ const PatientDashboard: React.FC = () => {
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Size</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Upload Date</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Download Links</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                 </tr>
               </thead>
@@ -171,6 +229,24 @@ const PatientDashboard: React.FC = () => {
                       ) : (
                         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Uploaded</span>
                       )}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <a
+                        href={`https://ipfs.io/ipfs/${file.id}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:underline block"
+                      >
+                        IPFS
+                      </a>
+                      <a
+                        href={file.file_url || "#"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-green-600 hover:underline block"
+                      >
+                        Supabase
+                      </a>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <button onClick={() => handleDeleteFile(file.id)} className="text-red-600 hover:text-red-900">
