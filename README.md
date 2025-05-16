@@ -1,4 +1,4 @@
-# 🧬 ZKPS – Zero-Knowledge Patient Sharing  
+# 🧬 ZKHealth – Zero-Knowledge Health Record Sharing
 **Built for Stellar Consensus Hackathon 2025**  
 _Web3 UX doesn’t have to suck. We proved it._
 
@@ -7,12 +7,15 @@ _Web3 UX doesn’t have to suck. We proved it._
 ## 🔥 Why: The Narrative
 
 **What we’re building**  
+
 ZKHealth is a privacy-first healthcare dapp that empowers patients to **securely share medical files** like vaccine records, test results, and diagnosis documents—with **full control over who sees what**. Using zero-knowledge proofs, we let patients prove that a **file exists and is authentic without exposing its contents**. But that’s just the start: users can also selectively share the actual PDF files with trusted healthcare providers through a **built-in encrypted file delivery system**, enabling **frictionless verification and care coordination**.
 
 **What it fixes**  
+
 Today’s medical record sharing is awful. Patients are forced to navigate a maze of portals, faxes, emails, and paper forms just to share basic health records. Providers often operate in disconnected systems with no real-time access to verified patient data, leading to gaps in information, delayed diagnoses, and slower care delivery. Worse, current solutions require users to sacrifice privacy or control, exposing their full health history even when only one file is needed. ZKHealth fixes this by giving patients full control over what they share, when they share it, and who gets to see it. Patients can prove they have a valid record (like a COVID vaccine) without revealing the document, or securely share the full file only when needed — all in a few taps, from their computer, without logging into five different portals. It’s faster for providers, private for patients, verifiable on-chain, and a hell of a lot cooler.
 
 **Who it helps**  
+
 Me. You. Us. 3.5 billion people have access to healthcare and every single one of them has to deal with the inherent problems within the medical file sharing space. We bridge privacy and UX to make sure people understand what of theirs is being shared, for how long, and on the flip side, whether that document is valid.
 
 **Why It’s Important**
