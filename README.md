@@ -25,12 +25,21 @@ It’s faster for providers, private for patients, verifiable on-chain, and a he
 **Who it helps**  
 Me. You. Us. 3.5 billion people have access to healthcare and every single one of them has to deal with the inherent problems within the medical file sharing space. We bridge privacy and UX to make sure people understand what of theirs is being shared, for how long, and on the flip side, whether that document is valid.
 
-**Why it’s important**  
-In the age of AI and healthcare digitization, **privacy and portability** of data matters more than ever. ZK Health is built to scale for real-world adoption with **decentralized proof and familiar UX**.
+**Why It’s Important**
+As healthcare digitizes and AI enters the clinical space, data privacy, control, and portability are no longer optional — they’re essential.
 
-**Value proposition**  
-🧠 **ZK privacy** + 🪪 **passkey identity** + 🌐 **on-chain anchoring** = Real UX breakthrough for Web3 healthcare.
+Patients deserve tools that let them share sensitive health records without handing over their entire medical history. Providers need verifiable, tamper-proof records they can trust instantly. And both sides need it to just work — without friction, logins, or blockchain headaches.
 
+ZKPS bridges that gap, combining zero-knowledge security with a user experience as smooth as any modern app, setting a new standard for how privacy-preserving medical data can flow in a Web3 world.
+
+**Value Proposition**
+🧠 ZK Proofs — prove the existence of a document without revealing it
+
+🪪 Passkey Auth — frictionless, wallet-free login and identity
+
+🌐 On-Chain Anchoring — immutable record of what was shared, when, and by whom
+
+Together, ZKPS delivers Web2-level UX with Web3-grade trust — a true leap forward for decentralized healthcare.
 ---
 
 ## ✅ Implemented Features
@@ -121,5 +130,5 @@ _(Add flowchart here)_
 
 ## 📬 Contact
 
-Built with ♥ by **[Your Team Name]**  
-[yourwebsite.com](https://yourwebsite.com) — [@yourTwitterHandle](https://twitter.com/yourTwitterHandle)
+We slept 2 hours last night but it was worth it
+Drew Manley, Val Levy, Armaan Hajar, Finn Fujimura
