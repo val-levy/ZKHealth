@@ -59,27 +59,14 @@ Together, ZKPS delivers Web2-level UX with Web3-grade trust — a true leap forw
 
 ---
 
-## 🌐 Live Links
-
-- 🧭 **Why Narrative**: [docs/WHY.md](https://github.com/your-team/zkps/docs/WHY.md)  
-- 🛠 **Technical Design Docs**: [docs/TECHNICAL_DESIGN.md](https://github.com/your-team/zkps/docs/TECHNICAL_DESIGN.md)  
-- 🌍 **Frontend App (Testnet)**: [https://zkps.health](https://zkps.health)  
-- 📦 **Public GitHub Repo**: [https://github.com/your-team/zkps](https://github.com/your-team/zkps)  
-- 🧾 **Deployed Contract**:  
-  - Contract ID: `GC4X...ZKPS1`  
-  - [View on Stellar Expert](https://stellar.expert/explorer/testnet/account/GC4X...ZKPS1)
-
----
-
 ## 📄 Technical Design Docs Overview
 
-> _See full doc at: [`docs/TECHNICAL_DESIGN.md`](https://github.com/your-team/zkps/docs/TECHNICAL_DESIGN.md)_
+> _See full doc at: [`docs/TECHNICAL_DESIGN.md`](https://github.com/val-levy/ZKHealth/tree/main/docs/TECHNICAL_DESIGN.md)_
 
 ### System Overview  
 A patient-facing app enabling passkey-authenticated file uploads, ZK hashing, proof generation, and on-chain anchoring—verifiable by providers.
 
 ### Architecture Diagram  
-_(Add flowchart here)_  
 - User → Uploads file → Poseidon hash → ZK proof → Send + store proof  
 - Stellar stores hash in `manageData`  
 - Providers verify hash from shared file + compare
@@ -103,14 +90,6 @@ _(Add flowchart here)_
 
 ---
 
-## 🧪 Optional
-
-- ✅ Automated ZK Proof testing  
-- ✅ Auto-deploy build artifacts  
-- 🔗 [Link to Launchtube Deployment](#)
-
----
-
 ## 📢 Tags & Metadata
 
 - **Repo Name**: `zkps-stellar-consensus-2025`  
@@ -121,5 +100,5 @@ _(Add flowchart here)_
 
 ## 📬 Contact
 
+**Authors:** Drew Manley, Val Levy, Armaan Hajar, Finn Fujimura  
 We slept 2 hours last night but it was worth it
-Drew Manley, Val Levy, Armaan Hajar, Finn Fujimura
