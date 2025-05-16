@@ -1,1 +1,5 @@
+<<<<<<< HEAD
+{"rustc":15497389221046826682,"features":"[]","declared_features":"[]","target":11341071938618574264,"profile":18280633939120273429,"path":16105187474270866087,"deps":[[3560055085443182966,"soroban_sdk",false,18117500596311089183]],"local":[{"CheckDepInfo":{"dep_info":"wasm32v1-none/release/.fingerprint/relationship-9fa7dd370f5b189a/dep-lib-relationship","checksum":false}}],"rustflags":["--remap-path-prefix=/Users/finnfujimura/.cargo/registry/src="],"config":2069994364910194474,"compile_kind":14430488398132994368}
+=======
 {"rustc":15497389221046826682,"features":"[]","declared_features":"[]","target":11341071938618574264,"profile":18280633939120273429,"path":16105187474270866087,"deps":[[3560055085443182966,"soroban_sdk",false,18001185278711471853]],"local":[{"CheckDepInfo":{"dep_info":"wasm32v1-none/release/.fingerprint/relationship-9fa7dd370f5b189a/dep-lib-relationship","checksum":false}}],"rustflags":["--remap-path-prefix=/Users/val/.cargo/registry/src="],"config":2069994364910194474,"compile_kind":14430488398132994368}
+>>>>>>> 4d83b47ac2ece2c789d128dae8859a387b155aeb

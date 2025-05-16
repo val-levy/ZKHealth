@@ -1,1 +1,5 @@
+<<<<<<< HEAD
+{"rustc":15497389221046826682,"features":"[\"default\", \"use_alloc\", \"use_std\"]","declared_features":"[\"default\", \"use_alloc\", \"use_std\"]","target":9541170365560449339,"profile":12935912534734832910,"path":16503262449012490020,"deps":[[12170264697963848012,"either",false,10100181873860616782]],"local":[{"CheckDepInfo":{"dep_info":"release/.fingerprint/itertools-df6287071b723174/dep-lib-itertools","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+=======
 {"rustc":15497389221046826682,"features":"[\"default\", \"use_alloc\", \"use_std\"]","declared_features":"[\"default\", \"use_alloc\", \"use_std\"]","target":9541170365560449339,"profile":12935912534734832910,"path":16718269195245704904,"deps":[[12170264697963848012,"either",false,9364507543769968290]],"local":[{"CheckDepInfo":{"dep_info":"release/.fingerprint/itertools-df6287071b723174/dep-lib-itertools","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+>>>>>>> 4d83b47ac2ece2c789d128dae8859a387b155aeb

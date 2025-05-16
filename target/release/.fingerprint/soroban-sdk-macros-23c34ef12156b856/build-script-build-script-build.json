@@ -1,1 +1,5 @@
+<<<<<<< HEAD
+{"rustc":15497389221046826682,"features":"[]","declared_features":"[\"testutils\"]","target":5408242616063297496,"profile":12935912534734832910,"path":16214770094214198110,"deps":[[8576480473721236041,"rustc_version",false,5117385611911704485],[14436471438139416390,"crate_git_revision",false,10236577438655430566]],"local":[{"CheckDepInfo":{"dep_info":"release/.fingerprint/soroban-sdk-macros-23c34ef12156b856/dep-build-script-build-script-build","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+=======
 {"rustc":15497389221046826682,"features":"[]","declared_features":"[\"testutils\"]","target":5408242616063297496,"profile":12935912534734832910,"path":16436412160340742569,"deps":[[8576480473721236041,"rustc_version",false,9420351967771710117],[14436471438139416390,"crate_git_revision",false,10998873287580225708]],"local":[{"CheckDepInfo":{"dep_info":"release/.fingerprint/soroban-sdk-macros-23c34ef12156b856/dep-build-script-build-script-build","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+>>>>>>> 4d83b47ac2ece2c789d128dae8859a387b155aeb

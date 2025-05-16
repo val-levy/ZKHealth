@@ -1,7 +1,11 @@
 error[E0463]: can't find crate for `std`
   |
   = note: the `wasm32v1-none` target may not support the standard library
+<<<<<<< HEAD
+  = note: `std` is required by `autocfg_f5536be7e71798df_0` because it does not declare `#![no_std]`
+=======
   = note: `std` is required by `autocfg_dc8c438af86a6487_0` because it does not declare `#![no_std]`
+>>>>>>> 4d83b47ac2ece2c789d128dae8859a387b155aeb
 
 error: aborting due to 1 previous error
 

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Interactive helper for Stellar Health contracts
-# Requirements: Rust, wasm32v1-none target, stellar-cli
+# Requirements: stellar-cli
 
 # 1. Install Rust toolchain
 read -rp "Install Rust (rustup + toolchain)? [y/N]: " INSTALL_RUST
@@ -51,46 +51,104 @@ do_build() {
 do_deploy() {
   read -rp "Enter deployer identity (alias): " SOURCE
 
-  echo "Deploying Agent contract..."
-  stellar contract deploy \
-    --wasm target/wasm32v1-none/release/agent.wasm \
-    --source-account "$SOURCE" \
-    --network "$NETWORK"
-  read -rp "Copy and paste the new Agent contract ID: " AGENT_ID
-  stellar contract alias add --overwrite --id "$AGENT_ID" agent
+  # Agent contract deployment
+  if stellar contract alias show agent &>/dev/null; then
+    read -rp "Alias 'agent' exists. Redeploy Agent contract with new WASM? [y/N]: " REDEPLOY_AGENT
+    if [[ "$REDEPLOY_AGENT" =~ ^[Yy]$ ]]; then
+      echo "Redeploying Agent contract..."
+      stellar contract deploy \
+        --wasm target/wasm32v1-none/release/agent.wasm \
+        --source-account "$SOURCE" \
+        --network "$NETWORK" \
+        --alias agent
+      echo "Agent contract redeployed."
+    else
+      echo "Skipping Agent redeploy."
+    fi
+  else
+    echo "Deploying Agent contract for the first time..."
+    stellar contract deploy \
+      --wasm target/wasm32v1-none/release/agent.wasm \
+      --source-account "$SOURCE" \
+      --network "$NETWORK" \
+      --alias agent
+    echo "Aliased as 'agent'."
+  fi
 
-  echo "Deploying Relationship contract..."
-  stellar contract deploy \
-    --wasm target/wasm32v1-none/release/relationship.wasm \
-    --source-account "$SOURCE" \
-    --network "$NETWORK"
-  read -rp "Copy and paste the new Relationship contract ID: " REL_ID
-  stellar contract alias add --overwrite --id "$REL_ID" relationship
+  # Relationship contract deployment
+  if stellar contract alias show relationship &>/dev/null; then
+    read -rp "Alias 'relationship' exists. Redeploy Relationship contract with new WASM? [y/N]: " REDEPLOY_REL
+    if [[ "$REDEPLOY_REL" =~ ^[Yy]$ ]]; then
+      echo "Redeploying Relationship contract..."
+      stellar contract deploy \
+        --wasm target/wasm32v1-none/release/relationship.wasm \
+        --source-account "$SOURCE" \
+        --network "$NETWORK" \
+        --alias relationship
+      echo "Relationship contract redeployed."
+    else
+      echo "Skipping Relationship redeploy."
+    fi
+  else
+    echo "Deploying Relationship contract for the first time..."
+    stellar contract deploy \
+      --wasm target/wasm32v1-none/release/relationship.wasm \
+      --source-account "$SOURCE" \
+      --network "$NETWORK" \
+      --alias relationship
+    echo "Aliased as 'relationship'."
+  fi
 
-  echo "Deployment complete. Aliases 'agent' and 'relationship' set."
+  echo "Deployment step complete."
 }
 
-# Generate and fund a new identity
+# Generate and optionally register an agent (auto-register PAT/PRO)
 do_generate() {
   read -rp "Enter new identity name: " NAME
   stellar keys generate "$NAME"
   stellar keys fund "$NAME" --network "$NETWORK"
   echo "Generated and funded '$NAME'."
+
+  read -rp "Do you want to register a role for '$NAME' now? [y/N]: " REG
+  if [[ "$REG" =~ ^[Yy]$ ]]; then
+    read -rp "Select role for $NAME [PAT/PRO]: " ROLE
+    stellar contract invoke \
+      --id agent \
+      --source-account "$NAME" \
+      --network "$NETWORK" \
+      -- register_agent --agent "$NAME" --role "$ROLE"
+    echo "Registered agent $NAME as $ROLE."
+  fi
 }
 
-# Register an agent with role PAT or PRO
-do_register_agent() {
-  read -rp "Agent alias to register: " AGENT
-  read -rp "Role for $AGENT [PAT/PRO]: " ROLE
+# Delete an agent
+do_delete_agent() {
+  read -rp "Agent alias to delete: " AGENT
+  # 1) On-chain deletion (immediate send)
   stellar contract invoke \
     --id agent \
     --source-account "$AGENT" \
     --network "$NETWORK" \
-    -- register_agent --agent "$AGENT" --role "$ROLE"
-  echo "Registered agent $AGENT as $ROLE."
+    -- delete_agent --agent "$AGENT"
+  echo "Deleted agent $AGENT on-chain."
+
+  # 2) Local identity cleanup from known locations
+  for DIR in \
+    "$HOME/.stellar/identity" \
+    "$HOME/.config/stellar/identity" \
+    "./.stellar/identity";
+  do
+    ID_FILE="$DIR/${AGENT}.toml"
+    if [[ -f "$ID_FILE" ]]; then
+      rm -v "$ID_FILE" && echo "Removed local identity file: $ID_FILE"
+      return
+    fi
+  done
+  echo "No local identity file found for '$AGENT' in ~/.stellar, ~/.config/stellar, or ./.stellar directories."
 }
 
-# Register a patient-provider relationship
+
+# Register relationship between patient and provider
 do_register_relationship() {
   read -rp "Patient alias: " PAT
   read -rp "Provider alias: " PROV
@@ -102,7 +160,7 @@ do_register_relationship() {
   echo "Registered relationship $PAT ↔ $PROV."
 }
 
-# Add a record under a relationship
+# Add a record pointer
 do_add_record() {
   read -rp "Patient alias: " PAT
   read -rp "Provider alias: " PROV
@@ -138,7 +196,7 @@ do_list_records() {
     -- list_records --patient "$PAT" --provider "$PROV"
 }
 
-# Revoke a relationship and clear records
+# Revoke a relationship
 do_revoke_relationship() {
   read -rp "Patient alias: " PAT
   read -rp "Provider alias: " PROV
@@ -170,7 +228,7 @@ Select an action:
  1) Generate & fund identity
  2) Build contracts
  3) Deploy contracts
- 4) Register agent
+ 4) Delete agent
  5) Register relationship
  6) Add record
  7) Check access
@@ -181,7 +239,7 @@ Select an action:
 EOF
   read -rp "Enter choice [1-11]: " CHOICE
   case "$CHOICE" in
-    1) do_generate ;; 2) do_build ;; 3) do_deploy ;; 4) do_register_agent ;; 5) do_register_relationship ;; 6) do_add_record ;; 7) do_has_access ;; 8) do_list_records ;; 9) do_revoke_relationship ;; 10) do_remove_record ;; 11) exit 0 ;;
+    1) do_generate ;; 2) do_build ;; 3) do_deploy ;; 4) do_delete_agent ;; 5) do_register_relationship ;; 6) do_add_record ;; 7) do_has_access ;; 8) do_list_records ;; 9) do_revoke_relationship ;; 10) do_remove_record ;; 11) exit 0 ;;
     *) echo "Invalid choice." ;;
   esac
 done
