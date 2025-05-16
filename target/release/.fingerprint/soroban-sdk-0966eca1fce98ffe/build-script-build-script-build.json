@@ -1,5 +1,1 @@
-<<<<<<< HEAD
 {"rustc":15497389221046826682,"features":"[]","declared_features":"[\"alloc\", \"curve25519-dalek\", \"docs\", \"hazmat\", \"testutils\"]","target":5408242616063297496,"profile":12935912534734832910,"path":11699363237428426428,"deps":[[8576480473721236041,"rustc_version",false,5117385611911704485]],"local":[{"CheckDepInfo":{"dep_info":"release/.fingerprint/soroban-sdk-0966eca1fce98ffe/dep-build-script-build-script-build","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
-=======
-{"rustc":15497389221046826682,"features":"[]","declared_features":"[\"alloc\", \"curve25519-dalek\", \"docs\", \"hazmat\", \"testutils\"]","target":5408242616063297496,"profile":12935912534734832910,"path":7726514738813603630,"deps":[[8576480473721236041,"rustc_version",false,9420351967771710117]],"local":[{"CheckDepInfo":{"dep_info":"release/.fingerprint/soroban-sdk-0966eca1fce98ffe/dep-build-script-build-script-build","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
->>>>>>> 4d83b47ac2ece2c789d128dae8859a387b155aeb

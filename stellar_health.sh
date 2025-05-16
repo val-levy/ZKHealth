@@ -4,6 +4,39 @@ set -euo pipefail
 # Interactive helper for Stellar Health contracts
 # Requirements: stellar-cli
 
+# Helper function to look up alias from address
+lookup_alias() {
+  local ADDRESS=$1
+  
+  # Loop through all aliases and check their public keys
+  for ALIAS in $(stellar keys ls); do
+    # Get the public key for this alias
+    KEY_ADDR=$(stellar keys public-key "$ALIAS")
+    
+    # Check if this matches the address we're looking for
+    if [[ "$KEY_ADDR" == "$ADDRESS" ]]; then
+      echo "$ALIAS"
+      return 0
+    fi
+  done
+  
+  # If no match found
+  echo "Unknown"
+}
+
+# Format the output of agent addresses with aliases
+format_agent_output() {
+  # Using a while loop to handle multi-line output with multiple addresses
+  echo "$1" | grep -o 'G[A-Z0-9]\{55\}' | while read -r ADDR; do
+    ALIAS=$(lookup_alias "$ADDR")
+    if [[ "$ALIAS" != "Unknown" ]]; then
+      echo "• $ALIAS ($ADDR)"
+    else
+      echo "• $ADDR (no local alias)"
+    fi
+  done
+}
+
 # 1. Install Rust toolchain
 read -rp "Install Rust (rustup + toolchain)? [y/N]: " INSTALL_RUST
 if [[ "$INSTALL_RUST" =~ ^[Yy]$ ]]; then
@@ -221,6 +254,63 @@ do_remove_record() {
   echo "Removed record $HASH for $PAT ↔ $PROV."
 }
 
+# List all providers for a patient
+do_list_patient_providers() {
+  read -rp "Patient alias: " PAT
+  echo "Providers for patient $PAT:"
+  OUTPUT=$(stellar contract invoke \
+    --id relationship \
+    --source-account "$PAT" \
+    --network "$NETWORK" \
+    --send=yes \
+    -- list_patient_providers --patient "$PAT")
+  
+  # Format the result with aliases
+  format_agent_output "$OUTPUT"
+}
+
+# List all patients for a provider
+do_list_provider_patients() {
+  read -rp "Provider alias: " PROV
+  echo "Patients for provider $PROV:"
+  OUTPUT=$(stellar contract invoke \
+    --id relationship \
+    --source-account "$PROV" \
+    --network "$NETWORK" \
+    --send=yes \
+    -- list_provider_patients --provider "$PROV")
+  
+  # Format the result with aliases
+  format_agent_output "$OUTPUT"
+}
+
+# List all agents related to a specific agent
+do_list_related_agents() {
+  read -rp "Agent alias: " AGENT
+  echo "All agents related to $AGENT:"
+  OUTPUT=$(stellar contract invoke \
+    --id relationship \
+    --source-account "$AGENT" \
+    --network "$NETWORK" \
+    --send=yes \
+    -- list_related_agents --agent "$AGENT")
+  
+  # Format the result with aliases
+  format_agent_output "$OUTPUT"
+}
+
+# Check if two agents have a relationship
+do_has_relationship() {
+  read -rp "First agent alias: " AGENT1
+  read -rp "Second agent alias: " AGENT2
+  stellar contract invoke \
+    --id relationship \
+    --source-account "$AGENT1" \
+    --network "$NETWORK" \
+    --send=yes \
+    -- has_relationship --agent1 "$AGENT1" --agent2 "$AGENT2"
+}
+
 # Main menu loop
 while true; do
   cat <<EOF
@@ -235,11 +325,29 @@ Select an action:
  8) List records
  9) Revoke relationship
 10) Remove record
-11) Exit
+11) List patient's providers
+12) List provider's patients 
+13) List all related agents
+14) Check relationship status
+15) Exit
 EOF
-  read -rp "Enter choice [1-11]: " CHOICE
+  read -rp "Enter choice [1-15]: " CHOICE
   case "$CHOICE" in
-    1) do_generate ;; 2) do_build ;; 3) do_deploy ;; 4) do_delete_agent ;; 5) do_register_relationship ;; 6) do_add_record ;; 7) do_has_access ;; 8) do_list_records ;; 9) do_revoke_relationship ;; 10) do_remove_record ;; 11) exit 0 ;;
+    1) do_generate ;; 
+    2) do_build ;; 
+    3) do_deploy ;; 
+    4) do_delete_agent ;; 
+    5) do_register_relationship ;; 
+    6) do_add_record ;; 
+    7) do_has_access ;; 
+    8) do_list_records ;; 
+    9) do_revoke_relationship ;; 
+    10) do_remove_record ;;
+    11) do_list_patient_providers ;;
+    12) do_list_provider_patients ;;
+    13) do_list_related_agents ;;
+    14) do_has_relationship ;;
+    15) exit 0 ;;
     *) echo "Invalid choice." ;;
   esac
 done
