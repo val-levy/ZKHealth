@@ -6,6 +6,8 @@ _Web3 UX doesn’t have to suck. We proved it._
 
 ## 🚀 User Interface/Experience
 
+[![Watch the demo](https://img.youtube.com/vi/BKQKZn5J904/0.jpg)](https://youtu.be/BKQKZn5J904)
+
 <img src="./docs/home.png" alt="ZKHealth Home Page" width="600"/>
 <img src="./docs/signin.png" alt="Sign-in Page" width="600"/>
 <img src="./docs/createaccount.png" alt="Account Creation" width="600"/>
