@@ -7,16 +7,26 @@ _Web3 UX doesn’t have to suck. We proved it._
 ## 🔥 Why: The Narrative
 
 **What we’re building**  
-ZKPS is a privacy-preserving healthcare dapp that enables patients to **selectively prove** the existence of off-chain medical documents—like vaccine records or diagnosis PDFs—using zero-knowledge proofs (ZKPs). Patients can **share proof of a file without exposing its contents**, and providers can **verify integrity** without storing sensitive data.
+ZKHealth is a privacy-first healthcare dapp that empowers patients to **securely share medical files** like vaccine records, test results, and diagnosis documents—with **full control over who sees what**.
+
+Using zero-knowledge proofs, we let patients prove that a **file exists and is authentic without exposing its contents**. But that’s just the start: users can also selectively share the actual PDF files with trusted healthcare providers through a **built-in encrypted file delivery system**, enabling **frictionless verification and care coordination**.
 
 **What it fixes**  
-Web3 UX is clunky—wallets, keys, and complex flows slow everything down. We built a **frictionless onboarding** system using **Stellar Passkeys**, removed wallet interactions, and created a seamless, mobile-first experience that just works. Patients can login with Face ID, upload files, and approve share requests—no crypto knowledge required.
+Today’s medical record sharing is awful.
+
+Patients are forced to navigate a maze of portals, faxes, emails, and paper forms just to share basic health records. Providers often operate in disconnected systems with no real-time access to verified patient data, leading to gaps in information, delayed diagnoses, and slower care delivery.
+
+Worse, current solutions require users to sacrifice privacy or control, exposing their full health history even when only one file is needed.
+
+ZKHealth fixes this by giving patients full control over what they share, when they share it, and who gets to see it. Patients can prove they have a valid record (like a COVID vaccine) without revealing the document, or securely share the full file only when needed — all in a few taps, from their computer, without logging into five different portals.
+
+It’s faster for providers, private for patients, verifiable on-chain, and a hell of a lot cooler.
 
 **Who it helps**  
-Patients managing sensitive health records and healthcare providers who need to verify authenticity without compromising patient privacy.
+Me. You. Us. 3.5 billion people have access to healthcare and every single one of them has to deal with the inherent problems within the medical file sharing space. We bridge privacy and UX to make sure people understand what of theirs is being shared, for how long, and on the flip side, whether that document is valid.
 
 **Why it’s important**  
-In the age of AI and healthcare digitization, **privacy and portability** of data matters more than ever. ZKPS is built to scale for real-world adoption with **decentralized proof and familiar UX**.
+In the age of AI and healthcare digitization, **privacy and portability** of data matters more than ever. ZK Health is built to scale for real-world adoption with **decentralized proof and familiar UX**.
 
 **Value proposition**  
 🧠 **ZK privacy** + 🪪 **passkey identity** + 🌐 **on-chain anchoring** = Real UX breakthrough for Web3 healthcare.
