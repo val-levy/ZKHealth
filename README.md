@@ -87,6 +87,32 @@ A patient-facing app enabling passkey-authenticated file uploads, ZK hashing, pr
 - `stellar/`: Rust contract logic + deployment  
 - `scripts/`: CLI for interacting with contracts
 
+### Smart Contracts
+
+#### 🧑‍⚕️ `AgentContract`
+Handles role assignment for all agents on the platform—either patients (`PAT`) or providers (`PRO`).
+
+- `register_agent(address, role)` – Registers an address as either a patient or provider  
+- `get_role(address)` – Returns the assigned role for a given agent  
+- `is_patient(address)` / `is_provider(address)` – Quick role check utilities  
+- `delete_agent(address)` – Deregisters an agent and removes their role
+
+This contract provides decentralized role-based access control for the platform.
+
+#### 🔗 `RelationshipContract`
+Manages patient-provider relationships and access to records via on-chain IPFS hashes.
+
+- `register_relationship(patient, provider)` – Establishes a link between patient and provider  
+- `add_record(patient, provider, record_hash)` – Attaches a file reference to an existing relationship  
+- `has_access(patient, provider, record_hash)` – Validates permission to access a record  
+- `list_records(patient, provider)` – Lists all records shared in a relationship  
+- `list_patient_providers(patient)` / `list_provider_patients(provider)` – Relationship lookups  
+- `list_related_agents(agent)` – All related parties for a given address  
+- `has_relationship(agent1, agent2)` – Checks bidirectional connection  
+- `remove_relationship(patient, provider)` – Cleans up both sides of a relationship and access permissions
+
+These contracts together form the backbone of permissioned, decentralized health data access.
+
 ### Design Choices  
 - **Off-chain file storage** to ensure GDPR/HIPAA compliance  
 - **Poseidon** for ZK-friendly hashing  
