@@ -1,0 +1,12 @@
+[
+  {
+    "id": "req-1",
+    "patientId": "pat-1",
+    "providerId": "doc-1",
+    "providerName": "Dr. Jane Smith",
+    "providerOrg": "City General Hospital",
+    "message": "Please share your recent MRI.",
+    "status": "pending",
+    "timestamp": "2025-05-15T12:00:00Z"
+  }
+]
