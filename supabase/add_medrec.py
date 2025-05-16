@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 
 
-current_user_wallet = ""
+current_user_wallet = "" #change all this to what you need, this isnt in the correct input format
 current_provider_wallet = ""  
 cid = input("CID: ")
 supabase_file_url = f"https://your.supabase.co/storage/v1/object/public/medical-records/{input("File name: ")}"
