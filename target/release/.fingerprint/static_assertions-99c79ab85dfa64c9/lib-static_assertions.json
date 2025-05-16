@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"rustc":15497389221046826682,"features":"[]","declared_features":"[\"nightly\"]","target":4712552111018528150,"profile":12935912534734832910,"path":2696940618409671822,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"release/.fingerprint/static_assertions-99c79ab85dfa64c9/dep-lib-static_assertions","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+=======
+{"rustc":15497389221046826682,"features":"[]","declared_features":"[\"nightly\"]","target":4712552111018528150,"profile":12935912534734832910,"path":3931358934269429252,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"release/.fingerprint/static_assertions-99c79ab85dfa64c9/dep-lib-static_assertions","checksum":false}}],"rustflags":[],"config":2069994364910194474,"compile_kind":0}
+>>>>>>> 4d83b47ac2ece2c789d128dae8859a387b155aeb

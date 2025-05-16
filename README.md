@@ -1,6 +1,5 @@
 # Stellar MedRec
 
-
 ## Project Structure
 
 - **src/**: Contains the source code for the application.
