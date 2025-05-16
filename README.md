@@ -4,6 +4,16 @@ _Web3 UX doesn’t have to suck. We proved it._
 
 ---
 
+## 🚀 User Interface/Experience
+
+<img src="./docs/home.png" alt="ZKHealth Home Page" width="600">
+<img src="./docs/signin.png" alt="Sign-in Page" width="300">
+<img src="./docs/createaccount.png" alt="Account Creation" width="300">
+<img src="./docs/patientdashboard.png" alt="Patient Dashboard" width="300">
+<img src="./docs/providerdashboard.png" alt="Provider Dashboard" width="300">
+
+---
+
 ## 🔥 Why: The Narrative
 
 **What we’re building**  
