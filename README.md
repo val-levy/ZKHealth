@@ -16,9 +16,11 @@ Today’s medical record sharing is awful. Patients are forced to navigate a maz
 Me. You. Us. 3.5 billion people have access to healthcare and every single one of them has to deal with the inherent problems within the medical file sharing space. We bridge privacy and UX to make sure people understand what of theirs is being shared, for how long, and on the flip side, whether that document is valid.
 
 **Why It’s Important**
+
 As healthcare digitizes and AI enters the clinical space, data privacy, control, and portability are no longer optional — they’re essential. Patients deserve tools that let them share sensitive health records without handing over their entire medical history. Providers need verifiable, tamper-proof records they can trust instantly. And both sides need it to just work — without friction, logins, or blockchain headaches. ZKPS bridges that gap, combining zero-knowledge security with a user experience as smooth as any modern app, setting a new standard for how privacy-preserving medical data can flow in a Web3 world.
 
 **Value Proposition**
+
 🧠 ZK Proofs — prove the existence of a document without revealing it
 
 🪪 Passkey Auth — frictionless, wallet-free login and identity
