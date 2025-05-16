@@ -101,4 +101,5 @@ A patient-facing app enabling passkey-authenticated file uploads, ZK hashing, pr
 ## 📬 Contact
 
 **Authors:** Drew Manley, Val Levy, Armaan Hajar, Finn Fujimura  
+**University of Oregon Blockchain Group:** https://www.oregonblockchain.org/
 We slept 2 hours last night but it was worth it
